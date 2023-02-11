@@ -20,12 +20,12 @@ CREATE TABLE IF NOT EXISTS UserCards (
   cardCount TINYINT unsigned not null
     COMMENT 'Number of copies of this card the user has in their collection.',
 
-  CONSTRAINT `fk__UserCards_userEmail__Users_email`
+  CONSTRAINT fk_UserCards_userEmail
     FOREIGN KEY (userEmail) REFERENCES Users (email)
       ON DELETE CASCADE
       ON UPDATE CASCADE,
 
-  CONSTRAINT `fk__UserCards_cardName__Cards_name`
+  CONSTRAINT fk_UserCards_cardName
       FOREIGN KEY (cardName) REFERENCES Cards (name)
       ON DELETE RESTRICT
       ON UPDATE RESTRICT
