@@ -13,11 +13,11 @@ CREATE TABLE IF NOT EXISTS Users (
 );
 
 CREATE TABLE IF NOT EXISTS UserCards (
-  userCardId SMALLINT unsigned auto_increment primary key
-    COMMENT 'This is Unsigned SMALLINT because, as of 2023, there are appx 20k Magic cards. Thus, the unsigned smallint max of 65535 is plenty big.'
+  userCardId SMALLINT UNSIGNED auto_increment primary key
+    COMMENT 'This is unsigned SMALLINT because, as of 2023, there are appx 20k Magic cards. Thus, the unsigned smallint max of 65535 is plenty big.'
 , userEmail VARCHAR(100) not null
 , cardName VARCHAR(150) not null
-, cardCount TINYINT unsigned not null
+, cardCount TINYINT UNSIGNED not null
     COMMENT 'Number of copies of this card the user has in their collection.'
 
 , CONSTRAINT fk_UserCards_userEmail
@@ -30,3 +30,15 @@ CREATE TABLE IF NOT EXISTS UserCards (
       ON DELETE RESTRICT
       ON UPDATE RESTRICT
 );
+
+CREATE TABLE IF NOT EXISTS Decks (
+  id INT UNSIGNED auto_increment primary key
+, format VARCHAR (10) not null
+, userCardId SMALLINT UNSIGNED not null
+, cardCount TINYINT UNSIGNED not null
+
+, CONSTRAINT fk_Decks_userCardId
+    FOREIGN KEY (userCardId) REFERENCES UserCards (userCardId)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+)
