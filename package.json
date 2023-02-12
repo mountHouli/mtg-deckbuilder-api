@@ -13,6 +13,6 @@
     "npm": "9.4.0"
   },
   "scripts": {
-    "start": "node src/app.js"
+    "start": "node --watch src/app.js"
   }
 }
