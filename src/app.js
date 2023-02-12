@@ -1,34 +1,13 @@
 require('dotenv').config()
 
-const config = require('./config')
+const { server } = require('./config')
 
 const express = require('express')
 const bodyParser = require('body-parser')
 
-const { server, db } = config
 const app = express()
 
-// TODO! Move Sequelize to its own file.
-const { Sequelize } = require('sequelize');
-
-const sequelize = new Sequelize(db.databaseName, db.user, db.password, {
-  host: db.host,
-  port: db.port,
-  dialect: 'mariadb',
-  define: {
-    timestamps: false
-  }
-});
-
-async function TODO__REMOVE_THIS_TEST_CODE__tryDbConn() {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-}
-TODO__REMOVE_THIS_TEST_CODE__tryDbConn()
+require('./db/sequelize-init')
 
 app.use(bodyParser.json())
 
