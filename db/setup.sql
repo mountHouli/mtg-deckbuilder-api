@@ -3,6 +3,8 @@ CREATE DATABASE IF NOT EXISTS deckbuilder;
 USE deckbuilder;
 
 CREATE TABLE IF NOT EXISTS Cards (
+  -- I would probably never set a VARCHAR as a primary key in an enterprise application.
+  -- Trying it out here, per: https://stackoverflow.com/questions/517579/strings-as-primary-keys-in-sql-database/517591#517591
   name VARCHAR(150) primary key
 , scryfallData JSON not null
     COMMENT 'Card data from Scryfall.com, in JSON format'
