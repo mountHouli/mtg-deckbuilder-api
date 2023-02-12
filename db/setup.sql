@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS deckbuilder;
 
 USE deckbuilder;
 
-CREATE TABLE IF NOT EXISTS Cards (
+CREATE TABLE IF NOT EXISTS Card (
   -- I would probably never set a VARCHAR as a primary key in an enterprise application.
   -- Trying it out here, per: https://stackoverflow.com/questions/517579/strings-as-primary-keys-in-sql-database/517591#517591
   name VARCHAR(150) primary key
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS Cards (
     COMMENT 'Card data from Scryfall.com, in JSON format'
 );
 
-CREATE TABLE IF NOT EXISTS Users (
+CREATE TABLE IF NOT EXISTS User (
   email VARCHAR(100) primary key
 );
 
@@ -23,17 +23,17 @@ CREATE TABLE IF NOT EXISTS UserCards (
     COMMENT 'Number of copies of this card the user has in their collection.'
 
 , CONSTRAINT fk_UserCards_userEmail
-    FOREIGN KEY (userEmail) REFERENCES Users (email)
+    FOREIGN KEY (userEmail) REFERENCES User (email)
       ON DELETE CASCADE
       ON UPDATE CASCADE
 
 , CONSTRAINT fk_UserCards_cardName
-      FOREIGN KEY (cardName) REFERENCES Cards (name)
+      FOREIGN KEY (cardName) REFERENCES Card (name)
       ON DELETE RESTRICT
       ON UPDATE RESTRICT
 );
 
-CREATE TABLE IF NOT EXISTS Decks (
+CREATE TABLE IF NOT EXISTS Deck (
   id INT UNSIGNED auto_increment primary key
 , format VARCHAR (10) not null
 , userCardId SMALLINT UNSIGNED not null
