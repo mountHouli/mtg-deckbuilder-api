@@ -1,10 +1,13 @@
 require('dotenv').config()
 
 const express = require('express')
+const bodyParser = require('body-parser')
 
 const app = express()
 
 const PORT = 8081
+
+app.use(bodyParser.json())
 
 app.get('/', async (req, res, next) => {
   res.status(200).send('Hello World!')
