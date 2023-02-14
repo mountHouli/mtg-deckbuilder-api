@@ -15,5 +15,8 @@
   },
   "scripts": {
     "start": "node --watch src/app.js"
+  },
+  "devDependencies": {
+    "jest": "^29.4.2"
   }
 }
